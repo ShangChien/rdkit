@@ -19,7 +19,7 @@ jobs:
       - name: Run build script
         run: |
           cd Code/MinimalLib
-          bash scripts/build_rdkitjs.sh https://github/shangchien/rdkit.git
+          bash scripts/build_rdkitjs.sh
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v3
