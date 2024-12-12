@@ -79,6 +79,18 @@ RUN git fetch --all --tags && \
 RUN mkdir build
 WORKDIR $RDBASE/build
 
+# 打印 BOOST_ROOT、BOOST_INCLUDE、BOOST_LIBRARY 等信息
+RUN echo "DEBUG: BOOST_ROOT=$BOOST_ROOT" \
+  && echo "DEBUG: Listing /opt/boost:" \
+  && ls -l /opt/boost \
+  && echo "DEBUG: Listing /opt/boost/include:" \
+  && ls -l /opt/boost/include \
+  && echo "DEBUG: Listing /opt/boost/lib:" \
+  && ls -l /opt/boost/lib \
+  && echo "DEBUG: Listing /opt/boost/lib/cmake:" \
+  && ls -l /opt/boost/lib/cmake || true
+
+
 RUN echo "source /opt/emsdk/emsdk_env.sh > /dev/null 2>&1" >> ~/.bashrc
 SHELL ["/bin/bash", "-c", "-l"]
 RUN emcmake cmake -DBOOST_ROOT=/opt/boost -DRDK_BUILD_FREETYPE_SUPPORT=ON -DRDK_BUILD_MINIMAL_LIB=ON \
