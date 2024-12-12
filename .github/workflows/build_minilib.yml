@@ -1,0 +1,28 @@
+name: Build MinimalLib WASM
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-minimallib:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Run build script
+        run: |
+          cd Code/MinimalLib
+          bash scripts/build_rdkitjs.sh https://github/shangchien/rdkit.git
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: minimal-lib-dist
+          path: Code/MinimalLib/dist

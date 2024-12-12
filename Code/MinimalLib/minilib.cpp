@@ -35,6 +35,9 @@
 #include <GraphMol/ChemTransforms/MolFragmenterJSONParser.h>
 #endif
 
+#include <GraphMol/DistGeomHelpers/Embedder.h>
+#include <GraphMol/ForceFieldHelpers/MMFF/MMFF.h>
+
 #include <GraphMol/Descriptors/Property.h>
 #include <GraphMol/Descriptors/MolDescriptors.h>
 #include <GraphMol/MolInterchange/MolInterchange.h>
@@ -1019,3 +1022,20 @@ JSMolBase *molzip(const JSMolBase &a, const JSMolBase &b,
   return new JSMol(new RDKit::RWMol(*out));
 }
 #endif
+
+
+int EmbedMolecule(JSMolBase *mol) {
+  if (!mol) return -1;
+  int res = RDKit::DGeomHelpers::EmbedMolecule(mol->get());
+  return res;
+}
+
+int MMFFOptimizeMolecule(JSMolBase *mol) {
+  if (!mol) return -1;
+  std::unique_ptr<ForceFields::ForceField> field(RDKit::MMFF::constructForceField(mol->get()));
+  if(!field) {
+    return -1;
+  }
+  int res = field->minimize();
+  return res; 
+}

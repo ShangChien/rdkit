@@ -386,3 +386,6 @@ class JSRGroupDecomposition {
 JSMolBase *molzip(const JSMolBase &a, const JSMolBase &b,
                   const std::string &details_json);
 #endif
+
+int EmbedMolecule(JSMolBase *mol);
+int MMFFOptimizeMolecule(JSMolBase *mol);
