@@ -18,7 +18,7 @@ jobs:
 
       - name: Run build script
         run: | 
-          ls -al Code/MinimalLib/
+          ls -al Code/MinimalLib/scripts/
           bash Code/MinimalLib/scripts/build_rdkitjs.sh
 
       - name: Upload build artifacts
