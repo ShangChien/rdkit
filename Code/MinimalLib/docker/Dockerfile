@@ -19,7 +19,7 @@
 # docker rm rdkit-minimallib-container
 
 
-ARG RDKIT_GIT_URL="https://github.com/rdkit/rdkit.git"
+ARG RDKIT_GIT_URL="https://github.com/shangchien/rdkit.git"
 ARG RDKIT_BRANCH="main"
 ARG EMSDK_VERSION="latest"
 ARG BOOST_MAJOR_VERSION="1"
