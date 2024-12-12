@@ -20,7 +20,7 @@
 
 
 ARG RDKIT_GIT_URL="https://github.com/rdkit/rdkit.git"
-ARG RDKIT_BRANCH="master"
+ARG RDKIT_BRANCH="main"
 ARG EMSDK_VERSION="latest"
 ARG BOOST_MAJOR_VERSION="1"
 ARG BOOST_MINOR_VERSION="84"
