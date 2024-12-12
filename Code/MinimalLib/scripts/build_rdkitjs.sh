@@ -1,7 +1,7 @@
 set -e
 
 # Clean and create distribution folder
-MINIMALLIB_OUTPUT_PATH="dist"
+MINIMALLIB_OUTPUT_PATH="Code/MinimalLib/dist"
 rm -rf $MINIMALLIB_OUTPUT_PATH
 mkdir -p $MINIMALLIB_OUTPUT_PATH
 

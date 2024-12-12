@@ -17,9 +17,7 @@ jobs:
         uses: docker/setup-buildx-action@v2
 
       - name: Run build script
-        run: |
-          cd Code/MinimalLib
-          bash scripts/build_rdkitjs.sh
+        run: bash scripts/build_rdkitjs.sh
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v3
