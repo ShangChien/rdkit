@@ -1046,7 +1046,7 @@ int UFFOptimizeMolecule(JSMolBase *mol) {
   if (!mol) {
     return -1;
   }
-  std::unique_ptr<ForceFields::ForceField> field(RDKit::UFF::constructForceField(*(mol->get())));
+  std::unique_ptr<ForceFields::ForceField> field(RDKit::UFF::constructForceField((mol->get())));
   if (!field) {
     return -1;
   }
