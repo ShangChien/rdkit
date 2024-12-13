@@ -93,15 +93,26 @@ RUN echo "DEBUG: BOOST_ROOT=$BOOST_ROOT" \
 
 RUN echo "source /opt/emsdk/emsdk_env.sh > /dev/null 2>&1" >> ~/.bashrc
 SHELL ["/bin/bash", "-c", "-l"]
-RUN emcmake cmake -DBOOST_ROOT=/opt/boost -DBoost_DIR=/opt/boost/lib/cmake/Boost-1.84.0 \
-  -Dboost_headers_DIR=/opt/boost/lib/cmake/boost_headers-1.84.0 -DCMAKE_PREFIX_PATH="/opt/boost;/opt/boost/lib/cmake" \
+RUN emcmake cmake \
+  -DBOOST_ROOT=/opt/boost \
+  -DBoost_DIR=/opt/boost/lib/cmake/Boost-1.84.0 \
+  -Dboost_headers_DIR=/opt/boost/lib/cmake/boost_headers-1.84.0 \
+  -DCMAKE_PREFIX_PATH="/opt/boost;/opt/boost/lib/cmake" \
   -DRDK_BUILD_FORCEFIELD=ON \
-  -DRDK_BUILD_FREETYPE_SUPPORT=ON -DRDK_BUILD_MINIMAL_LIB=ON \
-  -DRDK_BUILD_PYTHON_WRAPPERS=OFF -DRDK_BUILD_CPP_TESTS=OFF -DRDK_BUILD_INCHI_SUPPORT=ON \
-  -DRDK_USE_BOOST_SERIALIZATION=OFF -DRDK_OPTIMIZE_POPCNT=OFF -DRDK_BUILD_THREADSAFE_SSS=OFF \
-  -DRDK_BUILD_DESCRIPTORS3D=OFF -DRDK_TEST_MULTITHREADED=OFF \
-  -DRDK_BUILD_MAEPARSER_SUPPORT=OFF -DRDK_BUILD_COORDGEN_SUPPORT=ON \
-  -DRDK_BUILD_SLN_SUPPORT=OFF -DRDK_USE_BOOST_IOSTREAMS=OFF \
+  -DRDK_BUILD_FREETYPE_SUPPORT=ON \
+  -DRDK_BUILD_MINIMAL_LIB=ON \
+  -DRDK_BUILD_PYTHON_WRAPPERS=OFF \
+  -DRDK_BUILD_CPP_TESTS=OFF \
+  -DRDK_BUILD_INCHI_SUPPORT=ON \
+  -DRDK_USE_BOOST_SERIALIZATION=OFF \
+  -DRDK_OPTIMIZE_POPCNT=OFF \
+  -DRDK_BUILD_THREADSAFE_SSS=OFF \
+  -DRDK_BUILD_DESCRIPTORS3D=ON \
+  -DRDK_TEST_MULTITHREADED=OFF \
+  -DRDK_BUILD_MAEPARSER_SUPPORT=OFF \
+  -DRDK_BUILD_COORDGEN_SUPPORT=ON \
+  -DRDK_BUILD_SLN_SUPPORT=OFF \
+  -DRDK_USE_BOOST_IOSTREAMS=OFF \
   -DFREETYPE_INCLUDE_DIRS=/opt/emsdk/upstream/emscripten/cache/sysroot/include/freetype2 \
   -DFREETYPE_LIBRARY=/opt/emsdk/upstream/emscripten/cache/sysroot/lib/wasm32-emscripten/libfreetype.a \
   -DCMAKE_CXX_FLAGS="-Wno-enum-constexpr-conversion -s DISABLE_EXCEPTION_CATCHING=0" \
