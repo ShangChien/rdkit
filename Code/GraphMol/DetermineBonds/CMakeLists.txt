@@ -5,8 +5,6 @@ endif()
 rdkit_library(DetermineBonds DetermineBonds.cpp
               LINK_LIBRARIES ${ehtlib} FileParsers GraphMol RDGeneral)
 
-add_library(DetermineBonds_static STATIC DetermineBonds.cpp)
-
 target_compile_definitions(DetermineBonds PRIVATE RDKIT_DETERMINEBONDS_BUILD)
 
 rdkit_headers(DetermineBonds.h DEST GraphMol/DetermineBonds)
