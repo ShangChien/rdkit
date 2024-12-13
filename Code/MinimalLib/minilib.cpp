@@ -25,6 +25,7 @@
 #include <GraphMol/MolDraw2D/MolDraw2DSVG.h>
 #include <GraphMol/MolDraw2D/MolDraw2DUtils.h>
 #include <GraphMol/Substruct/SubstructMatch.h>
+#include <GraphMol/DetermineBonds/DetermineBonds.h>
 #ifdef RDK_BUILD_MINIMAL_LIB_SUBSTRUCTLIBRARY
 #include <GraphMol/SubstructLibrary/SubstructLibrary.h>
 #endif
@@ -1024,6 +1025,24 @@ JSMolBase *molzip(const JSMolBase &a, const JSMolBase &b,
   return new JSMol(new RDKit::RWMol(*out));
 }
 #endif
+
+
+// add custom function
+int DetermineBonds(JSMolBase *mol, bool useHueckel, int charge,
+                   double covFactor, bool allowChargedFragments,
+                   bool embedChiral, bool useAtomMap, bool useVdw) {
+  if (!mol) return -1;  // 检查输入
+
+  try {
+    auto &wmol = static_cast<RDKit::RWMol &>(mol->get());
+    RDKit::determineBonds(wmol, useHueckel, charge, covFactor, 
+                          allowChargedFragments, embedChiral, 
+                          useAtomMap, useVdw);
+    return 0;  // 成功返回
+  } catch (const std::exception &e) {
+    return -1;  // 捕获异常，返回错误代码
+  }
+}
 
 
 int EmbedMolecule(JSMolBase *mol) {

@@ -10,6 +10,7 @@
 //
 #include <string>
 #include <GraphMol/RDKitBase.h>
+#include <GraphMol/DetermineBonds/DetermineBonds.h>
 #include <GraphMol/SubstructLibrary/SubstructLibrary.h>
 #include <GraphMol/ChemReactions/Reaction.h>
 #include <GraphMol/ChemReactions/ReactionParser.h>
@@ -387,6 +388,10 @@ JSMolBase *molzip(const JSMolBase &a, const JSMolBase &b,
                   const std::string &details_json);
 #endif
 
+
+int DetermineBonds(JSMolBase *mol, bool useHueckel, int charge,
+                   double covFactor, bool allowChargedFragments,
+                   bool embedChiral, bool useAtomMap, bool useVdw);
 int EmbedMolecule(JSMolBase *mol);
 int MMFFOptimizeMolecule(JSMolBase *mol);
 int UFFOptimizeMolecule(JSMolBase *mol);

@@ -16,6 +16,7 @@
 #include <GraphMol/MolDraw2D/MolDraw2D.h>
 #include <GraphMol/MolDraw2D/MolDraw2DUtils.h>
 #include <GraphMol/MolDraw2D/MolDraw2DJS.h>
+#include <GraphMol/DetermineBonds/DetermineBonds.h>
 #if defined(RDK_BUILD_MINIMAL_LIB_MOLZIP) && \
     defined(RDK_BUILD_MINIMAL_LIB_RGROUPDECOMP)
 #include <GraphMol/ChemTransforms/MolFragmenter.h>
@@ -788,6 +789,8 @@ EMSCRIPTEN_BINDINGS(RDKit_minimal) {
       .function("get_buffer", &JSLog::get_buffer)
       .function("clear_buffer", &JSLog::clear_buffer);
 
+
+  function("DetermineBonds", &DetermineBonds, allow_raw_pointers());
   function("EmbedMolecule", &EmbedMolecule, allow_raw_pointers());
   function("MMFFOptimizeMolecule", &MMFFOptimizeMolecule, allow_raw_pointers());
   function("UFFOptimizeMolecule", &UFFOptimizeMolecule, allow_raw_pointers());
