@@ -1,6 +1,8 @@
 include_directories(${RDKit_ExternalDir})
 include_directories(${RDKit_ExternalDir}/rapidjson-1.1.0/include)
 
+add_compile_options(-Wno-nontrivial-memaccess)
+
 if(RDK_BUILD_MINIMAL_LIB)
     set(MINIMAL_LIB_LIBRARIES "MolInterchange_static;Abbreviations_static;"
         "CIPLabeler_static;MolDraw2D_static;Depictor_static;"
