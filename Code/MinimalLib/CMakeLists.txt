@@ -10,7 +10,7 @@ if(RDK_BUILD_MINIMAL_LIB)
         "Descriptors_static;SubstructMatch_static;FileParsers_static;"
         "SmilesParse_static;GraphMol_static;RDGeometryLib_static;"
         "RDGeneral_static;RGroupDecomposition_static;Fingerprints_static;"
-        "DistGeomHelpers_static;ForceFieldHelpers_static;ForceField_static")
+        "DetermineBonds_static;DistGeomHelpers_static;ForceFieldHelpers_static;ForceField_static")
     if(RDK_BUILD_INCHI_SUPPORT)
         add_definitions(-DRDK_BUILD_INCHI_SUPPORT)
         set(MINIMAL_LIB_LIBRARIES "${MINIMAL_LIB_LIBRARIES};RDInchiLib_static")
