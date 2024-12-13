@@ -788,6 +788,9 @@ EMSCRIPTEN_BINDINGS(RDKit_minimal) {
       .function("get_buffer", &JSLog::get_buffer)
       .function("clear_buffer", &JSLog::clear_buffer);
 
+  function("EmbedMolecule", &EmbedMolecule, allow_raw_pointers());
+  function("MMFFOptimizeMolecule", &MMFFOptimizeMolecule, allow_raw_pointers());
+
   function("version", &version);
   function("prefer_coordgen", &prefer_coordgen);
   function("use_legacy_stereo_perception", &use_legacy_stereo_perception);
