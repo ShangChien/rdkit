@@ -1041,3 +1041,15 @@ int MMFFOptimizeMolecule(JSMolBase *mol) {
   int res = field->minimize();
   return res; 
 }
+
+int UFFOptimizeMolecule(JSMolBase *mol) {
+  if (!mol) {
+    return -1;
+  }
+  std::unique_ptr<ForceFields::ForceField> field(RDKit::UFF::constructForceField(*(mol->get())));
+  if (!field) {
+    return -1;
+  }
+  int res = field->minimize();
+  return res; 
+}

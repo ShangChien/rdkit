@@ -790,6 +790,7 @@ EMSCRIPTEN_BINDINGS(RDKit_minimal) {
 
   function("EmbedMolecule", &EmbedMolecule, allow_raw_pointers());
   function("MMFFOptimizeMolecule", &MMFFOptimizeMolecule, allow_raw_pointers());
+  function("UFFOptimizeMolecule", &UFFOptimizeMolecule, allow_raw_pointers());
 
   function("version", &version);
   function("prefer_coordgen", &prefer_coordgen);

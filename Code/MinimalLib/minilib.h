@@ -389,3 +389,4 @@ JSMolBase *molzip(const JSMolBase &a, const JSMolBase &b,
 
 int EmbedMolecule(JSMolBase *mol);
 int MMFFOptimizeMolecule(JSMolBase *mol);
+int UFFOptimizeMolecule(JSMolBase *mol);
