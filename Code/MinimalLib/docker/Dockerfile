@@ -99,6 +99,7 @@ RUN emcmake cmake \
   -Dboost_headers_DIR=/opt/boost/lib/cmake/boost_headers-1.84.0 \
   -DCMAKE_PREFIX_PATH="/opt/boost;/opt/boost/lib/cmake" \
   -DRDK_BUILD_FORCEFIELD=ON \
+  -DRDK_BUILD_XYZ2MOL_SUPPORT=ON\
   -DRDK_BUILD_FREETYPE_SUPPORT=ON \
   -DRDK_BUILD_MINIMAL_LIB=ON \
   -DRDK_BUILD_PYTHON_WRAPPERS=OFF \
