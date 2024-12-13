@@ -35,8 +35,10 @@
 #include <GraphMol/ChemTransforms/MolFragmenterJSONParser.h>
 #endif
 
+#include <ForceField/ForceField.h>
 #include <GraphMol/DistGeomHelpers/Embedder.h>
 #include <GraphMol/ForceFieldHelpers/MMFF/MMFF.h>
+#include <GraphMol/ForceFieldHelpers/UFF/UFF.h>
 
 #include <GraphMol/Descriptors/Property.h>
 #include <GraphMol/Descriptors/MolDescriptors.h>

@@ -39,7 +39,9 @@ if(RDK_BUILD_MINIMAL_LIB)
         endif()
     endif()
     add_executable(RDKit_minimal jswrapper.cpp minilib.cpp JSONParsers.cpp)
-    target_link_libraries(RDKit_minimal ${MINIMAL_LIB_LIBRARIES})
+    target_link_libraries(RDKit_minimal ${MINIMAL_LIB_LIBRARIES} RDKit::DistGeomHelpers
+    RDKit::ForceFieldHelpers
+    RDKit::ForceFields)
 
     set_target_properties(RDKit_minimal PROPERTIES LINK_FLAGS "--bind")
 endif(RDK_BUILD_MINIMAL_LIB)
