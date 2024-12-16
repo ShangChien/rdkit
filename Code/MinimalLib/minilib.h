@@ -401,14 +401,14 @@ int UFFOptimizeMolecule(JSMolBase *mol);
 
 
 std::vector<int> EmbedMultipleConfs(
-    JSMolBase *mol, int numConfs = 10, int maxAttempts = 1000, 
-    int randomSeed = 0xa700f, bool useRandomCoords = true, bool useSrETKDG = false
+    JSMolBase *mol, int numConfs = 10, bool useSrETKDG = false, bool useRandomCoords = true, int maxAttempts = 1000, 
+    int randomSeed = 0xa700f, double optimizerForceTol = 0.0135
 )
 
 double MMFFOptimizeConformer(
-    JSMolBase *mol, int confId, double optimizerForceTol = 0.0135
+    JSMolBase *mol, int confId
 )
 
 double UFFOptimizeConformer(
-    JSMolBase *mol, int confId, double optimizerForceTol = 0.0135
+    JSMolBase *mol, int confId
 )
