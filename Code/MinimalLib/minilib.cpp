@@ -1028,14 +1028,14 @@ JSMolBase *molzip(const JSMolBase &a, const JSMolBase &b,
 
 
 // add custom function
-int DetermineBonds(JSMolBase *mol, bool useHueckel, int charge,
+int DetermineBonds(JSMolBase *mol, int charge,
                    double covFactor, bool allowChargedFragments,
                    bool embedChiral, bool useAtomMap, bool useVdw) {
   if (!mol) return -1;  // 检查输入
 
   try {
     auto &wmol = static_cast<RDKit::RWMol &>(mol->get());
-    RDKit::determineBonds(wmol, useHueckel, charge, covFactor, 
+    RDKit::determineBonds(wmol, false, charge, covFactor, 
                           allowChargedFragments, embedChiral, 
                           useAtomMap, useVdw);
     return 0;  // 成功返回
@@ -1075,8 +1075,8 @@ int UFFOptimizeMolecule(JSMolBase *mol) {
 
 // multi-gen
 std::vector<int> EmbedMultipleConfs(
-    JSMolBase *mol, int numConfs, bool useSrETKDG, bool useRandomCoords, int maxAttempts, 
-    int randomSeed, double optimizerForceTol
+    JSMolBase *mol, int numConfs, bool useSrETKDG, bool useRandomCoords, double optimizerForceTol,
+    int randomSeed
 ) {
     std::vector<int> confIds;
     if (!mol) return confIds;
@@ -1085,7 +1085,6 @@ std::vector<int> EmbedMultipleConfs(
         useSrETKDG ? RDKit::DGeomHelpers::srETKDGv3 : RDKit::DGeomHelpers::ETKDGv3;
 
     params.numThreads = 1;
-    params.maxAttempts = maxAttempts;
     params.randomSeed = randomSeed;
     params.useRandomCoords = useRandomCoords;
     params.optimizerForceTol = optimizerForceTol;
