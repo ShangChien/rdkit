@@ -1072,3 +1072,62 @@ int UFFOptimizeMolecule(JSMolBase *mol) {
   int res = field->minimize();
   return res; 
 }
+
+// multi-gen
+std::vector<int> EmbedMultipleConfs(
+    JSMolBase *mol, int numConfs = 10, int maxAttempts = 1000, 
+    int randomSeed = 0xa700f, bool useRandomCoords = true, bool useSrETKDG = false
+) {
+    std::vector<int> confIds;
+    if (!mol) return confIds;
+
+    RDKit::DGeomHelpers::EmbedParameters params = useSrETKDG ? 
+        RDKit::DGeomHelpers::srETKDGv3() : RDKit::DGeomHelpers::ETKDGv3();
+
+    params.numThreads = 1;  // 单线程运行
+    params.maxAttempts = maxAttempts;
+    params.randomSeed = randomSeed;
+    params.useRandomCoords = useRandomCoords;
+
+    RDKit::DGeomHelpers::EmbedMultipleConfs(
+        mol->get(), confIds, numConfs, params
+    );
+
+    return confIds;
+}
+
+double MMFFOptimizeConformer(
+    JSMolBase *mol, int confId, double optimizerForceTol = 0.0135
+) {
+    if (!mol || confId < 0) return -1.0;
+
+    std::unique_ptr<RDKit::ForceFields::ForceField> field(
+        RDKit::MMFF::constructForceField(mol->get(), confId)
+    );
+
+    if (!field) return -1.0;
+
+    field->initialize();
+    field->setTolerance(optimizerForceTol);  // 设置力场收敛容限
+    double energy = field->minimize();
+
+    return energy;
+}
+
+double UFFOptimizeConformer(
+    JSMolBase *mol, int confId, double optimizerForceTol = 0.0135
+) {
+    if (!mol || confId < 0) return -1.0;
+
+    std::unique_ptr<RDKit::ForceFields::ForceField> field(
+        RDKit::UFF::constructForceField(mol->get(), confId)
+    );
+
+    if (!field) return -1.0;
+
+    field->initialize();
+    field->setTolerance(optimizerForceTol);  // 设置力场收敛容限
+    double energy = field->minimize();
+
+    return energy;
+}

@@ -392,6 +392,23 @@ JSMolBase *molzip(const JSMolBase &a, const JSMolBase &b,
 int DetermineBonds(JSMolBase *mol, bool useHueckel, int charge,
                    double covFactor, bool allowChargedFragments,
                    bool embedChiral, bool useAtomMap, bool useVdw);
+
 int EmbedMolecule(JSMolBase *mol);
+
 int MMFFOptimizeMolecule(JSMolBase *mol);
+
 int UFFOptimizeMolecule(JSMolBase *mol);
+
+
+std::vector<int> EmbedMultipleConfs(
+    JSMolBase *mol, int numConfs = 10, int maxAttempts = 1000, 
+    int randomSeed = 0xa700f, bool useRandomCoords = true, bool useSrETKDG = false
+)
+
+double MMFFOptimizeConformer(
+    JSMolBase *mol, int confId, double optimizerForceTol = 0.0135
+)
+
+double UFFOptimizeConformer(
+    JSMolBase *mol, int confId, double optimizerForceTol = 0.0135
+)
