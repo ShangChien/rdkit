@@ -1082,7 +1082,7 @@ std::vector<int> EmbedMultipleConfs(
     if (!mol) return confIds;
 
     RDKit::DGeomHelpers::EmbedParameters params = 
-        useSrETKDG ? RDKit::DGeomHelpers::srETKDGv3() : RDKit::DGeomHelpers::ETKDGv3();
+        useSrETKDG ? RDKit::DGeomHelpers::srETKDGv3 : RDKit::DGeomHelpers::ETKDGv3;
 
     params.numThreads = 1;
     params.maxAttempts = maxAttempts;
@@ -1108,7 +1108,7 @@ double MMFFOptimizeConformer(JSMolBase *mol, int confId) {
 
     field->initialize();
     field->minimize();
-    return field->CalcEnergy();
+    return field->calcEnergy();
 }
 
 double UFFOptimizeConformer(JSMolBase *mol, int confId) {
@@ -1122,7 +1122,7 @@ double UFFOptimizeConformer(JSMolBase *mol, int confId) {
 
     field->initialize();
     field->minimize();
-    return field->CalcEnergy();
+    return field->calcEnergy();
 }
 
 
