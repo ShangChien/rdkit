@@ -846,36 +846,14 @@ EMSCRIPTEN_BINDINGS(RDKit_minimal) {
   //
   //
   // customize function
-  // default param need a more wrapper define
   //
   //
   //
-  int DetermineBondsWrapped(JSMolBase *mol, 
-                          int charge = 0, 
-                          double covFactor = 1.3, 
-                          bool allowChargedFragments = true, 
-                          bool embedChiral = true, 
-                          bool useAtomMap = false, 
-                          bool useVdw = false) {
-    return DetermineBonds(mol, charge, covFactor, allowChargedFragments, 
-                          embedChiral, useAtomMap, useVdw);
-  }
-  function("DetermineBonds", &DetermineBondsWrapped, allow_raw_pointers());
-
+  function("DetermineBonds", &DetermineBonds, allow_raw_pointers());
   function("EmbedMolecule", &EmbedMolecule, allow_raw_pointers());
   function("MMFFOptimizeMolecule", &MMFFOptimizeMolecule, allow_raw_pointers());
   function("UFFOptimizeMolecule", &UFFOptimizeMolecule, allow_raw_pointers());
-
-  int EmbedMultipleConfsWrapped(JSMolBase *mol, 
-                                int numConfs = 10, 
-                                bool useSrETKDG = false, 
-                                bool useRandomCoords = true, 
-                                double optimizerForceTol = 0.001,
-                                int randomSeed = 0xa700f) {
-    return EmbedMultipleConfs(mol, numConfs, useSrETKDG, useRandomCoords, optimizerForceTol,randomSeed);
-  }
-  function("EmbedMultipleConfs", &EmbedMultipleConfsWrapped, allow_raw_pointers());
-
+  function("EmbedMultipleConfs", &EmbedMultipleConfs, allow_raw_pointers());
   function("MMFFOptimizeConformer", &MMFFOptimizeConformer, allow_raw_pointers());
   function("UFFOptimizeConformer", &UFFOptimizeConformer, allow_raw_pointers());
 }
