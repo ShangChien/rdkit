@@ -1088,7 +1088,7 @@ std::vector<int> EmbedMultipleConfs(
     params.maxAttempts = maxAttempts;
     params.randomSeed = randomSeed;
     params.useRandomCoords = useRandomCoords;
-    params.optimizerForceTol = optimizerForceTol
+    params.optimizerForceTol = optimizerForceTol;
 
     RDKit::DGeomHelpers::EmbedMultipleConfs(
         mol->get(), confIds, numConfs, params
