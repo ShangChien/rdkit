@@ -395,7 +395,7 @@ int DetermineBonds(JSMolBase *mol, int charge = 0,
 
 int EmbedMolecule(JSMolBase *mol);
 
-int MMFFOptimizeMolecule(JSMolBase *mol);
+int MMFFOptimizeMolecule(JSMolBase *mol, const std::string &variant = "MMFF94");
 
 int UFFOptimizeMolecule(JSMolBase *mol);
 
@@ -406,7 +406,7 @@ std::vector<int> EmbedMultipleConfs(
 );
 
 double MMFFOptimizeConformer(
-    JSMolBase *mol, int confId
+    JSMolBase *mol, int confId, const std::string &variant = "MMFF94"
 );
 
 double UFFOptimizeConformer(

@@ -38,6 +38,8 @@
 
 #include <ForceField/ForceField.h>
 #include <GraphMol/DistGeomHelpers/Embedder.h>
+#include <GraphMol/ForceFieldHelpers/MMFF/MMFFMolProperties.h>
+#include <GraphMol/ForceFieldHelpers/MMFF/Builder.h>
 #include <GraphMol/ForceFieldHelpers/MMFF/MMFF.h>
 #include <GraphMol/ForceFieldHelpers/UFF/UFF.h>
 
@@ -1051,12 +1053,27 @@ int EmbedMolecule(JSMolBase *mol) {
   return res;
 }
 
-int MMFFOptimizeMolecule(JSMolBase *mol) {
-  if (!mol) return -1;
-  std::unique_ptr<ForceFields::ForceField> field(RDKit::MMFF::constructForceField(mol->get()));
-  if(!field) {
+int MMFFOptimizeMolecule(JSMolBase *mol, const std::string &variant) {
+  if (!mol) {
     return -1;
   }
+  
+  // 1. 根据传入的 variant 创建 MMFFMolProperties。可选值 "MMFF94" 或 "MMFF94s"
+  RDKit::MMFF::MMFFMolProperties mmffProps(mol->get(), variant);
+  // 如果 variant 参数不对、或者分子里有不兼容的原子类型，isValid() 可能会返回 false
+  if (!mmffProps.isValid()) {
+    return -1;
+  }
+
+  // 2. 使用上面创建好的 mmffProps 指针来构建力场
+  std::unique_ptr<ForceFields::ForceField> field(
+      RDKit::MMFF::constructForceField(mol->get(), &mmffProps)
+  );
+  if (!field) {
+    return -1;
+  }
+
+  // 3. 最终执行能量最小化
   int res = field->minimize();
   return res; 
 }
@@ -1072,6 +1089,7 @@ int UFFOptimizeMolecule(JSMolBase *mol) {
   int res = field->minimize();
   return res; 
 }
+
 
 // multi-gen
 std::vector<int> EmbedMultipleConfs(
@@ -1096,11 +1114,19 @@ std::vector<int> EmbedMultipleConfs(
     return confIds;
 }
 
-double MMFFOptimizeConformer(JSMolBase *mol, int confId) {
+double MMFFOptimizeConformer(JSMolBase *mol, int confId, const std::string &variant) {
     if (!mol || confId < 0) return -1.0;
 
+    // 1. 根据传入的 variant 创建 MMFFMolProperties。可选值 "MMFF94" 或 "MMFF94s"
+    RDKit::MMFF::MMFFMolProperties mmffProps(mol->get(), variant);
+
+    // 如果 variant 参数不对、或者分子里有不兼容的原子类型，isValid() 可能会返回 false
+    if (!mmffProps.isValid()) {
+        return -1;
+    }
+
     std::unique_ptr<ForceFields::ForceField> field(
-        RDKit::MMFF::constructForceField(mol->get(), confId)
+        RDKit::MMFF::constructForceField(mol->get(), &mmffProps, 100, confId)
     );
 
     if (!field) return -1.0;
