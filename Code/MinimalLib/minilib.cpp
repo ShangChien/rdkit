@@ -38,7 +38,6 @@
 
 #include <ForceField/ForceField.h>
 #include <GraphMol/DistGeomHelpers/Embedder.h>
-#include <GraphMol/ForceFieldHelpers/MMFF/MMFFMolProperties.h>
 #include <GraphMol/ForceFieldHelpers/MMFF/Builder.h>
 #include <GraphMol/ForceFieldHelpers/MMFF/MMFF.h>
 #include <GraphMol/ForceFieldHelpers/UFF/UFF.h>
